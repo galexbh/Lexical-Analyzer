@@ -10,10 +10,10 @@ El presente proyecto consiste en la creación de un analizador léxico en base a
 
 ## Autores/Authors ✒️
 
-* **Yillian Robertina Juares** - *20141001752* - [username](https://github.com/)
-* **Jessica Alejandra Manzanares** - *20151001483* - [username](https://github.com/)
-* **Yensy Gabriela Velásquez** - *20151900052* - [username](https://github.com/)
-* **Angel David Gonzáles** - *20162500106* - [username](https://github.com/)
+* **Yillian Robertina Juares** - *20141001752* - [Yillian88](https://github.com/Yillian88)
+* **Jessica Alejandra Manzanares** - *20151001483* - [jmanzanaresm](https://github.com/jmanzanaresm)
+* **Yensy Gabriela Velásquez** - *20151900052* - [yensy95](https://github.com/yensy95)
+* **Angel David Gonzáles** - *20162500106* - [angelgonzalardon](https://github.com/angelgonzalardon)
 * **Gabriel Alexander Barrientos** - *20181000058* - [galexbh](https://github.com/galexbh)
 
 ## Necesario/Necessary 📄
