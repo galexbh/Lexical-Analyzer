@@ -38,44 +38,50 @@ int main() {
                     printf("%s", tokens);
                 }
                 else {
-                    if (ch>='0'&&ch<='9') {
-                        temp=3;
-                        char tokens[]="<Tkn_digito>\n";
+                    if (ch=='('||ch==')'||ch=='['||ch==']'||ch=='{'||ch=='}') {//--
+                        char tokens[]="<Tkn_caracter>\n";
                         printf("%s", tokens);
                     }
                     else {
-                        if (ch=='+'||ch=='-'||ch=='*'||ch=='/') {
-                            temp=4;
-                            char tokens[]="<Tkn_operador>\n";
+                        if (ch>='0'&&ch<='9') {
+                            temp=3;
+                            char tokens[]="<Tkn_digito>\n";
                             printf("%s", tokens);
                         }
                         else {
-                            if (ch=='<'||ch=='>'||ch=='<'&&'='||ch=='>'&&'='||ch=='!'&&'='||ch=='='&&'=') {
-                                char tokens[]="<Tkn_operador_relacion>\n";
+                            if (ch=='+'||ch=='-'||ch=='*'||ch=='/') {
+                                temp=4;
+                                char tokens[]="<Tkn_operador>\n";
                                 printf("%s", tokens);
                             }
                             else {
-                                if (ch=='.') {
-                                    char tokens[]="<Tkn_punto_decimal>\n";
+                                if (ch=='<'||ch=='>'||ch=='<'&&'='||ch=='>'&&'='||ch=='!'&&'='||ch=='='&&'=') {
+                                    char tokens[]="<Tkn_operador_relacion>\n";
                                     printf("%s", tokens);
                                 }
                                 else {
-                                    if (ch==' ') {
-                                        char tokens[]="       ";
+                                    if (ch=='.') {
+                                        char tokens[]="<Tkn_punto_decimal>\n";
                                         printf("%s", tokens);
                                     }
                                     else {
-                                        while (!feof(pf)) {
-                                            fgets(arreglo, 100, pf);
-                                            for (i=0; i< longitudArreglo; i++) {
-                                                if (strcmp(palabrasReservadas[i], arreglo)== 0) {
-                                                    printf("<Tkn_palabra_reservada>\n");
-                                                    break;
-                                                }
-                                                else {
-                                                    printf("Error");
-                                                    break;
+                                        if (ch==' ') {
+                                            char tokens[]="       ";
+                                            printf("%s", tokens);
+                                        }
+                                        else {
+                                            while (!feof(pf)) {
+                                                fgets(arreglo, 100, pf);
+                                                for (i=0; i< longitudArreglo; i++) {
+                                                    if (strcmp(palabrasReservadas[i], arreglo)== 0) {
+                                                        printf("<Tkn_palabra_reservada>\n");
+                                                        break;
+                                                    }
+                                                    else {
+                                                        printf("Error");
+                                                        break;
 
+                                                    }
                                                 }
                                             }
                                         }
@@ -93,4 +99,5 @@ int main() {
         fclose(pf);
     }
     return 0;
+
 }
