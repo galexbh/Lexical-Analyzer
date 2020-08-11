@@ -1,7 +1,8 @@
 #include <stdio.h> //entrada de texto libreria
 #include <stdlib.h>
 
-char palabrasReservadas[][50] ={ "leer", "imprimir", "cursor", "mientras", "repetir", "si", "sino", "hasta", "hacer", "finsi", "definir" };
+char palabrasReservadas[][50] ={ "leer", "imprimir", "cursor", "mientras", "repetir", "si", "sino", "hasta", "hacer"
+, "finsi", "definir" };
 
 int main() {
 
@@ -24,7 +25,6 @@ int main() {
     {
         freopen("archivoSalida.txt", "w", stdout);
         printf("Los tokens encontrados en el texto son:\n");
-
         while ((ch=fgetc(pf))!=EOF) {
             if (ch>='A'&&ch<='Z') {
                 temp=1;
@@ -32,22 +32,60 @@ int main() {
                 printf("%s", tokens);
             }
             else {
-                while (!feof(pf)) {
-                    fgets(arreglo, 100, pf);
-                    for (i=0; i< longitudArreglo; i++) {
-                        if (strcmp(palabrasReservadas[i], arreglo)== 0) {
-                            printf("<Tkn_palabra_reservada>\n");
-                            break;
+                if (ch>='a'&&ch<='z') {
+                    temp=2;
+                    char tokens[]="<Tkn_minuscula>\n";
+                    printf("%s", tokens);
+                }
+                else {
+                    if (ch=='('||ch==')'||ch=='['||ch==']'||ch=='{'||ch=='}') {
+                        char tokens[]="<Tkn_caracter>\n";
+                        printf("%s", tokens);
+                    }
+                    else {
+                        if (ch>='0'&&ch<='9') {
+                            temp=3;
+                            char tokens[]="<Tkn_digito>\n";
+                            printf("%s", tokens);
                         }
                         else {
-                            printf("Error");
-                            break;
+                            if (ch=='+'||ch=='-'||ch=='*'||ch=='/') {
+                                temp=4;
+                                char tokens[]="<Tkn_operador>\n";
+                                printf("%s", tokens);
+                            }
+                            else {
+                                if (ch=='<'||ch=='>'||ch=='<'&&'='||ch=='>'&&'='||ch=='!'&&'='||ch=='='&&'=') {
+                                    char tokens[]="<Tkn_operador_relacion>\n";
+                                    printf("%s", tokens);
+                                }
+                                else {
+                                    while (!feof(pf)) {
+                                        fgets(arreglo, 100, pf);
+                                        for (i=0; i< longitudArreglo; i++) {
+                                            if (strcmp(palabrasReservadas[i], arreglo)== 0) {
+                                                printf("<Tkn_palabra_reservada>\n");
+                                                break;
+                                            }
+                                            else {
+                                                printf("Error");
+                                                break;
 
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+
             }
+
         }
+        fclose(stdout);
+        fclose(pf);
     }
     return 0;
+
 }
