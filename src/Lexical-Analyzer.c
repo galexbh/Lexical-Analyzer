@@ -38,7 +38,8 @@ int main(void){
         exit(1);
     }
 
-   ///Estados o Patrones
+ ///Estados o Patrones    
+ 
 
     ///Casos
         switch (caracter){
@@ -111,6 +112,7 @@ int main(void){
                 if(estado==0){
                     strcat(imprimir,"<Tkn_inicio_bloque>");
                 }
+                break;
             case '}':
                 if(estado==0){
                     strcat(imprimir,"<Tkn_fin_bloque>");
@@ -130,6 +132,7 @@ int main(void){
                 if(estado==0){
                     strcat(imprimir,"<Tkn_cadena>");
                 }
+                break;
             default:
                 estado=6;
                 break;
