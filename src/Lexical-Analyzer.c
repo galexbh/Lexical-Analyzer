@@ -1,103 +1,57 @@
-#include <stdio.h> //entrada de texto libreria
+/*
+   ! Lexical-Analyzer
+   * It receives a text document as input and produces an output composed of tokens.
+   @authors galexbh | jmanzanaresm | Yillian88 | yensy95 | angelgonzalardon
+   @version 1.0
+*/
+
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-char palabrasReservadas[][50] ={ "leer", "imprimir", "cursor", "mientras", "repetir", "si", "sino", "hasta", "hacer"
-, "finsi", "definir" };
+int main(void){
+    
+    //Declaracioness
+    char * tipos_datos[][3]={"entero","decimal","cadena"};
+    char palabras_reservadas[][11]={"definir","hasta","mientras","repetir","si","hacer","finsi","sino","leer","imprimir","cursor"};
+	char operador_relacional[][6]={"<",">","==","!=","<=",">="};
 
-int main() {
+    int estado=0; //ESTADO INICIAL
+    int contador=0;
+    char cadena[20]="",res[30]="<Tkn_";
+    
+    //Respuesta a Imprimir en Array
+    char imprimir[1000]="";
+    
+    printf("--------------ANALIZADOR LEXICO EN C--------------\n");
+    //Abriendo Archivo Externo
+    FILE *ptfile;
+    char caracter;
 
-    FILE *pf;
-    char arreglo[100]; // lectura de datos
-    char ch;
-    int temp;
-    int indice = -1;
-    int i;
-    int Estado=0;
-    int longitudArreglo = sizeof(palabrasReservadas)/sizeof(palabrasReservadas[0]);
+    printf("%s",imprimir);
+    fclose(ptfile);
+    ptfile=NULL;
 
-    pf=fopen("archivoEntrada.txt", "r");
-
-    if (pf==NULL) {
-        printf("Error...archivo no encontrado\n");
+    ptfile=fopen("input_file.mem","r");
+    if(ptfile==NULL){
+        fputs("error",stderr);
         exit(1);
     }
-    else
-    {
-        freopen("archivoSalida.txt", "w", stdout);
-        printf("Los tokens encontrados en el texto son:\n");
-        while ((ch=fgetc(pf))!=EOF) {
-            if (ch>='A'&&ch<='Z') {
-                temp=1;
-                char tokens[]="<Tkn_mayuscula>\n";
-                printf("%s", tokens);
-            }
-            else {
-                if (ch>='a'&&ch<='z') {
-                    temp=2;
-                    char tokens[]="<Tkn_minuscula>\n";
-                    printf("%s", tokens);
-                }
-                else {
-                    if (ch=='('||ch==')'||ch=='['||ch==']'||ch=='{'||ch=='}') {//--
-                        char tokens[]="<Tkn_caracter>\n";
-                        printf("%s", tokens);
-                    }
-                    else {
-                        if (ch>='0'&&ch<='9') {
-                            temp=3;
-                            char tokens[]="<Tkn_digito>\n";
-                            printf("%s", tokens);
-                        }
-                        else {
-                            if (ch=='+'||ch=='-'||ch=='*'||ch=='/') {
-                                temp=4;
-                                char tokens[]="<Tkn_operador>\n";
-                                printf("%s", tokens);
-                            }
-                            else {
-                                if (ch=='<'||ch=='>'||ch=='<'&&'='||ch=='>'&&'='||ch=='!'&&'='||ch=='='&&'=') {
-                                    char tokens[]="<Tkn_operador_relacion>\n";
-                                    printf("%s", tokens);
-                                }
-                                else {
-                                    if (ch=='.') {
-                                        char tokens[]="<Tkn_punto_decimal>\n";
-                                        printf("%s", tokens);
-                                    }
-                                    else {
-                                        if (ch==' ') {
-                                            char tokens[]="       ";
-                                            printf("%s", tokens);
-                                        }
-                                        else {
-                                            while (!feof(pf)) {
-                                                fgets(arreglo, 100, pf);
-                                                for (i=0; i< longitudArreglo; i++) {
-                                                    if (strcmp(palabrasReservadas[i], arreglo)== 0) {
-                                                        printf("<Tkn_palabra_reservada>\n");
-                                                        break;
-                                                    }
-                                                    else {
-                                                        printf("Error");
-                                                        break;
 
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+   ///Estados o Patrones
 
+    
+
+    ///Casos
+        switch (caracter){
+            case 'n':
+            if (estado==1 || estado==2 || estado==0)
+            {
+                estado=3;  //Estado de Numero entrante
             }
 
-        }
-        fclose(stdout);
-        fclose(pf);
-    }
+    ptfile=fopen("output_file.mem","w");
+    fwrite(imprimir,1,strlen(imprimir) ,ptfile);
+    fclose(ptfile);
     return 0;
-
 }
