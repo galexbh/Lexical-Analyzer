@@ -40,8 +40,6 @@ int main(void){
 
    ///Estados o Patrones
 
-    
-
     ///Casos
         switch (caracter){
             case 'n':
@@ -49,8 +47,104 @@ int main(void){
             {
                 estado=3;  //Estado de Numero entrante
             }
+                break;
+            case 'm'://Minusculas
+                if(estado==0||estado==1) 
+                {
+                estado=1;  
+                }
+                if(estado==2){
+                    estado=5;
+                }
+                break;
+            case 'M'://Mayusculas
+                if(estado==0||estado==70) 
+                {
+                estado=2;  
+                }
+                break;
+        
+            case '.':
+                if (estado==3 ||estado==1)
+                {
+                estado=4;  //estado Punto Decimal
+                }
+                break;
+            case 'p':
+                if(estado==1||estado==0)
+                {
+                    strcat(imprimir,res);
+                    estado=0;
+                }
+                break;
+            case 'v':
+                if(estado==5){
+                    strcat(res,"variable>");
+                    strcat(imprimir,res);
+                    memset(cadena,0,sizeof cadena);
+                    contador=0;
+                    estado=0;
+                }
+                break;
+            case 'o':
+                if(estado==6){
+                    strcat(imprimir,res);
+                    memset(cadena,0,sizeof cadena);
+                    contador=0;
+                    estado=0;
+                }
+            case 'l':
+                if(estado==6){
+                    strcat(imprimir,res);
+                    memset(cadena,0,sizeof cadena);
+                    contador=0;
+                    estado=0;
+                }
+                break;
+            case 'u':
+                strcat(imprimir,"<Tkn_numero>");
+                memset(cadena,0,sizeof cadena);
+                contador=0;
+                estado=0;
+                break;
+            case '{':
+                if(estado==0){
+                    strcat(imprimir,"<Tkn_inicio_bloque>");
+                }
+            case '}':
+                if(estado==0){
+                    strcat(imprimir,"<Tkn_fin_bloque>");
+                }
+                break;
+            case '(':
+                if(estado==0){
+                    strcat(imprimir,"<Tkn_inicio_parentesis>");
+                }
+                break;
+            case ')':
+                if(estado==0){
+                    strcat(imprimir,"<Tkn_fin_parentesis>");
+                }
+                break;
+            case '"':
+                if(estado==0){
+                    strcat(imprimir,"<Tkn_cadena>");
+                }
+            default:
+                estado=6;
+                break;
+        }
+        //FIN DEL SWITCH
+        //DECISIONES
+        
+    }
 
-    ptfile=fopen("output_file.mem","w");
+    printf("%s",imprimir);
+    fclose(ptfile);
+    ptfile=NULL;
+
+
+    ptfile=fopen("archivo_salida.mem","w");
     fwrite(imprimir,1,strlen(imprimir) ,ptfile);
     fclose(ptfile);
     return 0;
