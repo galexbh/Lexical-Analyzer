@@ -65,7 +65,7 @@ int main(void) {
 
                         caracter='p';
                         strcat(res, cadena);
-                        strcat(res, ">");
+                        strcat(res, ">\n");
                     }
                 }
                 memset(cadena, 0, sizeof cadena);
@@ -76,7 +76,7 @@ int main(void) {
                     if (strcmp(cadena, operador_relacional[i])==0) {
                         caracter='o';
                         strcat(res, "operador_relacional");
-                        strcat(res, ">");
+                        strcat(res, ">\n");
                     }
                 }
                 memset(cadena, 0, sizeof cadena);
@@ -130,7 +130,7 @@ int main(void) {
             break;
         case 'v':
             if (estado==5) {
-                strcat(res, "variable>");
+                strcat(res, "variable>\n");
                 strcat(imprimir, res);
                 memset(cadena, 0, sizeof cadena);
                 contador=0;
@@ -153,34 +153,34 @@ int main(void) {
             }
             break;
         case 'u':
-            strcat(imprimir, "<Tkn_numero>");
+            strcat(imprimir, "<Tkn_numero>\n");
             memset(cadena, 0, sizeof cadena);
             contador=0;
             estado=0;
             break;
         case '{':
             if (estado==0) {
-                strcat(imprimir, "<Tkn_inicio_bloque>");
+                strcat(imprimir, "<Tkn_inicio_bloque>\n");
             }
             break;
         case '}':
             if (estado==0) {
-                strcat(imprimir, "<Tkn_fin_bloque>");
+                strcat(imprimir, "<Tkn_fin_bloque>\n");
             }
             break;
         case '(':
             if (estado==0) {
-                strcat(imprimir, "<Tkn_inicio_parentesis>");
+                strcat(imprimir, "<Tkn_inicio_parentesis>\n");
             }
             break;
         case ')':
             if (estado==0) {
-                strcat(imprimir, "<Tkn_fin_parentesis>");
+                strcat(imprimir, "<Tkn_fin_parentesis>\n");
             }
             break;
         case '"':
             if (estado==0) {
-                strcat(imprimir, "<Tkn_cadena>");
+                strcat(imprimir, "<Tkn_cadena>\n");
             }
             break;
         default:
