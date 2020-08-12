@@ -20,7 +20,7 @@ El presente proyecto consiste en la creación de un analizador léxico en base a
 
 [GCC](https://gcc.gnu.org/) 
 
-## Compilar/compile⚙️
+## Compilar/compile ⚙️
 
 **Linux**
 

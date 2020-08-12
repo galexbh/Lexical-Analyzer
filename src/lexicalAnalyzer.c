@@ -195,7 +195,7 @@ int main(void) {
     fclose(ptfile);
     ptfile=NULL;
 
-    ptfile=fopen("archivo_salida.mem", "w");
+    ptfile=fopen("output.mem", "w");
     fwrite(imprimir, 1, strlen(imprimir), ptfile);
     fclose(ptfile);
 
