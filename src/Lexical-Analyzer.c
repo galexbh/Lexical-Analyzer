@@ -43,22 +43,21 @@ int main(void) {
             if (caracter >= 'a' && caracter <= 'z') {
                 caracter='m';
 
-            }            
+            }
             else if (caracter >= 'A' && caracter <= 'Z') {
                 caracter='M';
-            }            
+            }
             else if (caracter >= '0' && caracter <= '9') {
                 caracter='n';
             }
         }        
-            else {
-            strcpy(res, "<Tkn_");
+    else {
+        strcpy(res, "<Tkn_");
 
-            if (estado==5) {
-                caracter='v';
-            }            
-            else if (estado!=6) {
-
+        if (estado==5) {
+            caracter='v';
+        }            
+        else if (estado!=6) {
                 //Busqueda de Palabra reservada
                 for (int i=0;i<=(sizeof(palabras_reservadas)/sizeof(palabras_reservadas[0]));i++) {
                     if (strcmp(cadena, palabras_reservadas[i])==0)
@@ -83,13 +82,17 @@ int main(void) {
                 memset(cadena, 0, sizeof cadena);
                 contador=0;
             }
+            if (estado==3) {
+                caracter='u';
+            }
         }
 
-        ///Estados o Patrones    
+        /*Estados o Patrones*/
 
+   /*Casos*/
 
-           ///Casos
         switch (caracter) {
+
         case 'n':
             if (estado==1 || estado==2 || estado==0)
             {
@@ -186,16 +189,15 @@ int main(void) {
         }
         //FIN DEL SWITCH
         //DECISIONES
-
     }
 
     printf("%s", imprimir);
     fclose(ptfile);
     ptfile=NULL;
 
-
     ptfile=fopen("archivo_salida.mem", "w");
     fwrite(imprimir, 1, strlen(imprimir), ptfile);
     fclose(ptfile);
+
     return 0;
 }
