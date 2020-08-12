@@ -6,7 +6,7 @@ El presente proyecto consiste en la creación de un analizador léxico en base a
 
 ## Docente/Teacher 👨‍💻
 
-* **Miguel Antonio Sauceda Barahona** - [username](https://github.com/)
+* **Miguel Antonio Sauceda Barahona**
 
 ## Autores/Authors ✒️
 
@@ -19,3 +19,15 @@ El presente proyecto consiste en la creación de un analizador léxico en base a
 ## Necesario/Necessary 📄
 
 [GCC](https://gcc.gnu.org/) 
+
+## Compilar/compile⚙️
+
+**Linux**
+
+```bash
+cd ~/Lexical-Analyzer/src/
+
+gcc lexicalAnalyzer.c
+
+./a.out
+```
