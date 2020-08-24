@@ -2,7 +2,7 @@
    ! Lexical-Analyzer
    * It receives a text document as input and produces an output composed of tokens.
    @authors galexbh | jmanzanaresm | Yillian88 | yensy95 | angelgonzalardon
-   @version 1.0
+   @version 1.1
 */
 
 #include <stdio.h>
@@ -25,15 +25,15 @@ int main(void) {
 
     printf("--------------ANALIZADOR LEXICO EN C--------------\n");
     //Abriendo Archivo Externo
-    FILE *ptfile;
+    FILE *ptfile; 
     char caracter;
 
-    ptfile=fopen("input_file.mem", "r");
+    ptfile=fopen("input_file.mem", "r"); // Abrir el archivo en modo lectura.
     if (ptfile==NULL) {
         fputs("error", stderr);
         exit(1);
     }
-    while ((caracter=fgetc(ptfile))!=EOF) {
+    while ((caracter=fgetc(ptfile))!=EOF) { //Mientras caracter sea distinto al final del archivo
 
         if (caracter != ' ') {
             cadena[contador]=caracter;
@@ -41,39 +41,38 @@ int main(void) {
 
             //FILTRAR letra(Mayuscula o Minuscula) o numero 
             if (caracter >= 'a' && caracter <= 'z') {
-                caracter='m';
-
+                caracter='m'; //Minusculas
             }
             else if (caracter >= 'A' && caracter <= 'Z') {
-                caracter='M';
+                caracter='M'; //Mayusculas
             }
             else if (caracter >= '0' && caracter <= '9') {
-                caracter='n';
+                caracter='n'; //Estado de Numero entrante
             }
-        }        
+        }
     else {
-        strcpy(res, "<Tkn_");
-
+        strcpy(res, "<Tkn_"); //char *strcpy ( char *destino, const char *origen );
+                              
         if (estado==5) {
-            caracter='v';
+            caracter='v'; //Estado de Variable
         }            
         else if (estado!=6) {
                 //Busqueda de Palabra reservada
                 for (int i=0;i<=(sizeof(palabras_reservadas)/sizeof(palabras_reservadas[0]));i++) {
                     if (strcmp(cadena, palabras_reservadas[i])==0)
                     {
-
-                        caracter='p';
-                        strcat(res, cadena);
+                        caracter='p'; // Estado palabras reservadas
+                        strcat(res, cadena); //añade una cadena a otra pasándole dos punteros a los bloques de memoria reservados. 
                         strcat(res, ">\n");
                     }
                 }
-                memset(cadena, 0, sizeof cadena);
+                memset(cadena, 0, sizeof cadena); //C *memset(void *str, int c, size_t n)
+                                        //copia el caracter 0 (NULL - ASCII) (un char sin signo) a los primeros n caracteres de la cadena.
                 contador=0;
             }
             if (estado==6) {
                 for (int i=0;i<=(sizeof(operador_relacional)/sizeof(operador_relacional[0]));i++) {
-                    if (strcmp(cadena, operador_relacional[i])==0) {
+                    if (strcmp(cadena, operador_relacional[i])==0) { //Compara la cadena con el operador relacional
                         caracter='o';
                         strcat(res, "operador_relacional");
                         strcat(res, ">\n");
@@ -83,7 +82,7 @@ int main(void) {
                 contador=0;
             }
             if (estado==3) {
-                caracter='u';
+                caracter='u'; //Estado de números
             }
         }
 
@@ -99,7 +98,7 @@ int main(void) {
                 estado=3;  //Estado de Numero entrante
             }
             break;
-        case 'm'://Minusculas
+        case 'm':          //Minusculas
             if (estado==0||estado==1)
             {
                 estado=1;
@@ -108,13 +107,12 @@ int main(void) {
                 estado=5;
             }
             break;
-        case 'M'://Mayusculas
+        case 'M':          //Mayusculas
             if (estado==0||estado==70)
             {
                 estado=2;
             }
             break;
-
         case '.':
             if (estado==3 ||estado==1)
             {
@@ -124,7 +122,7 @@ int main(void) {
         case 'p':
             if (estado==1||estado==0)
             {
-                strcat(imprimir, res);
+                strcat(imprimir, res); //Estado palabras reservadas
                 estado=0;
             }
             break;
@@ -187,15 +185,18 @@ int main(void) {
             estado=6;
             break;
         }
-        //FIN DEL SWITCH
-        //DECISIONES
-    }
+        
+    } // Repetir iteración
+
+    /* Imprimir por consola */
 
     printf("%s", imprimir);
-    fclose(ptfile);
-    ptfile=NULL;
+    fclose(ptfile); // Cerramos el archivo de modo lectura
+    ptfile=NULL; // Limpiar buffer
 
-    ptfile=fopen("output.mem", "w");
+    /* Abrir archivo en modo escritura */
+
+    ptfile=fopen("output.mem", "w"); 
     fwrite(imprimir, 1, strlen(imprimir), ptfile);
     fclose(ptfile);
 
